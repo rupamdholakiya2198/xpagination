@@ -13,8 +13,8 @@ const EmployeeTable = ({ employees }) => {
       </thead>
       <tbody>
         {employees.length > 0 ? (
-          employees.map(emp => (
-            <tr key={emp.id}>
+          employees.map((emp, index) => (
+            <tr key={emp.id} data-testid={`employee-row-${index}`}>
               <td>{emp.id}</td>
               <td>{emp.name}</td>
               <td>{emp.email}</td>
@@ -23,7 +23,9 @@ const EmployeeTable = ({ employees }) => {
           ))
         ) : (
           <tr>
-            <td colSpan="4" align="center">No data available</td>
+            <td colSpan="4" align="center">
+              No data available
+            </td>
           </tr>
         )}
       </tbody>
