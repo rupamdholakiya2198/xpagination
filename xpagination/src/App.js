@@ -45,7 +45,7 @@ const App = () => {
         <button onClick={handlePrevious} disabled={currentPage === 1}>
           Previous
         </button>
-        <p data-testid="page-number">{currentPage}</p>
+        <p>{currentPage}</p>
         <button onClick={handleNext} disabled={currentPage === totalPages}>
           Next
         </button>
