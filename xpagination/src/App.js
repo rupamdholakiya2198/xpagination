@@ -9,9 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch(
-          'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
-        );
+        const response = await fetch('https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json');
         if (!response.ok) {
           throw new Error('API fetch failed');
         }
@@ -25,45 +23,30 @@ const App = () => {
     fetchEmployees();
   }, []);
 
-  const totalPages = Math.ceil(employees.length / employeesPerPage);
-  const firstIndex = (currentPage - 1) * employeesPerPage;
-  const lastIndex = firstIndex + employeesPerPage;
+  
+  const lastIndex = currentPage * employeesPerPage;
+  const firstIndex = lastIndex - employeesPerPage;
   const currentEmployees = employees.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(employees.length / employeesPerPage);
 
   const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
-    }
+    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
   };
 
   const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
-    }
+    if (currentPage > 1) setCurrentPage(prev => prev - 1);
   };
 
   return (
     <div style={{ padding: '20px' }}>
       <h2>Employee Data</h2>
-
       <EmployeeTable employees={currentEmployees} />
-
       <div style={{ marginTop: '20px' }}>
-        <button
-          onClick={handlePrevious}
-          disabled={currentPage === 1}
-          data-testid="previous-button"
-        >
+        <button onClick={handlePrevious} disabled={currentPage === 1}>
           Previous
         </button>
-
         <p data-testid="page-number">{currentPage}</p>
-
-        <button
-          onClick={handleNext}
-          disabled={currentPage === totalPages}
-          data-testid="next-button"
-        >
+        <button onClick={handleNext} disabled={currentPage === totalPages}>
           Next
         </button>
       </div>
