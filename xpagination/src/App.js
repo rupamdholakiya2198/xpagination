@@ -57,9 +57,7 @@ const App = () => {
           Previous
         </button>
 
-        <span style={{ margin: '0 10px' }} data-testid="page-number">
-          Page {currentPage}
-        </span>
+        <p data-testid="page-number">{currentPage}</p>
 
         <button
           onClick={handleNext}
